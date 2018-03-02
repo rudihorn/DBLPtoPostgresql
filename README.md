@@ -1,4 +1,4 @@
-# DBLPtoPostgresql
+1# DBLPtoPostgresql
 A small parser for the DBLP xml file
 
 ## Instructions
@@ -6,11 +6,13 @@ In order to use this, download the dblp.dtd and dblp.xml.gz files from http://db
 
 Something like:
 
+```
 wget http://dblp.uni-trier.de/xml/dblp.dtd
 wget http://dblp.uni-trier.de/xml/dblp.xml.gz
 gunzip dblp.xml.gz
 ./DBLPToPostgresql 
 psql dblp < *.sql
+```
 
 ## Tables
 
