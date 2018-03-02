@@ -4,6 +4,14 @@ A small parser for the DBLP xml file
 ## Instructions
 In order to use this, download the dblp.dtd and dblp.xml.gz files from http://dblp.uni-trier.de/xml/. Extract the dblp.xml.gz file to dblp.xml and run the F# program in the same directory. It should produce a set of sql files which can be imported into Postgresql. 
 
+Something like:
+
+wget http://dblp.uni-trier.de/xml/dblp.dtd
+wget http://dblp.uni-trier.de/xml/dblp.xml.gz
+gunzip dblp.xml.gz
+./DBLPToPostgresql 
+psql dblp < *.sql
+
 ## Tables
 
 The most important tables are:
