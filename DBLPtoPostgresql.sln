@@ -1,0 +1,25 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 15
+VisualStudioVersion = 15.0.27130.2027
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}") = "DBLPtoPostgresql", "DBLPtoPostgresql\DBLPtoPostgresql.fsproj", "{E9F735F3-E3F8-4CB4-9FDE-07B1758D8D9D}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{E9F735F3-E3F8-4CB4-9FDE-07B1758D8D9D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E9F735F3-E3F8-4CB4-9FDE-07B1758D8D9D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E9F735F3-E3F8-4CB4-9FDE-07B1758D8D9D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E9F735F3-E3F8-4CB4-9FDE-07B1758D8D9D}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+	GlobalSection(ExtensibilityGlobals) = postSolution
+		SolutionGuid = {C21AB404-A66D-4596-B777-029C524D4C72}
+	EndGlobalSection
+EndGlobal
