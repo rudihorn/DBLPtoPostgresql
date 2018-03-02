@@ -1,3 +1,4 @@
+*.vs
 *.sql
 *.dtd
 *.xml
