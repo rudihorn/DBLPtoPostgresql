@@ -21,30 +21,30 @@ let main argv =
           Col.Key ("author", "author", ColType.String); ]
     )
     let proceedings_author = SqlDumpStream("proceedings_author.sql", "proceedings_author", 
-        [ Col.Key ("key", "proceedings", ColType.String);
+        [ Col.Key ("key", "proceeding", ColType.String);
           Col.Key ("author", "author", ColType.String); ]
     )
     let proceedings_article = SqlDumpStream("proceedings_article.sql", "proceedings_author", 
-        [ Col.Key ("proceedings", "proceedings", ColType.String);
+        [ Col.Key ("proceedings", "proceeding", ColType.String);
           Col.Key ("key", "proceedings", ColType.String); ]
     )
     let proceedings = SqlDumpStream("proceedings.sql", "proceedings", 
-        [ Col.Key ("key", "proceedings", ColType.String);
+        [ Col.Key ("key", "proceeding", ColType.String);
           Col.CAs ("title", "proceedings_name", ColType.String);
           Col.CAs ("year", "proceedings_year", ColType.Int);
           Col.MC ("author", "author", ColType.String, 
             fun str el -> proceedings_author.InsertMul str el) ]
     )
     let inproceedings_author = SqlDumpStream("inproceedings_author.sql", "inproceedings_author", 
-        [ Col.Key ("key", "inproceedings", ColType.String);
+        [ Col.Key ("key", "inproceeding", ColType.String);
           Col.Key ("author", "author", ColType.String); ]
     )
     let inproceedings_crossref = SqlDumpStream("inproceedings_crossref.sql", "inproceedings_crossref", 
-        [ Col.Key ("key", "inproceedings", ColType.String);
+        [ Col.Key ("key", "inproceeding", ColType.String);
           Col.CAs ("proceedings", "proceedings", ColType.String); ]
     )
     let inproceedings = SqlDumpStream("inproceedings.sql", "inproceedings", 
-        [ Col.Key ("key", "inproceedings", ColType.String);
+        [ Col.Key ("key", "inproceeding", ColType.String);
           Col.C ("title", ColType.String);
           Col.C ("year", ColType.Int);
           Col.MC ("crossref", "crossref", ColType.String,
