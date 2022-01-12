@@ -10,26 +10,26 @@ open Utility
 type SqlDumpStream(file : string, table : string, fields : Col list) =
     let writer = new StreamWriter(file)
     let mutable first = true
-    let mutable counter = 0 
+    let mutable counter = 0
 
-    member this.EscapeTable = 
+    member this.EscapeTable =
         table
-    member this.InsertStatement = 
-        fprintfn writer "INSERT INTO %s (%s) VALUES" this.EscapeTable 
+    member this.InsertStatement =
+        fprintfn writer "INSERT INTO %s (%s) VALUES" this.EscapeTable
             << Seq.fold cmbcomma ""
             <| seq { for c in fields do if not c.Hide then yield c.Alias }
         first <- true
 
-    member this.Header = 
+    member this.Header =
         fprintfn writer "DROP TABLE IF EXISTS %s;" <| this.EscapeTable
         fprintfn writer "CREATE TABLE %s (" <| this.EscapeTable
         for c in fields do
             if not c.Hide then
                 fprintfn writer "   %s %s NOT NULL," c.Alias <| c.Type.SQLType
         fprintfn writer "   PRIMARY KEY (%s)"
-            << Seq.fold cmbcomma "" 
-            <| seq { 
-                for col in fields do 
+            << Seq.fold cmbcomma ""
+            <| seq {
+                for col in fields do
                     if col.IsKeyCol then
                         yield col.Alias
             }
@@ -52,8 +52,8 @@ type SqlDumpStream(file : string, table : string, fields : Col list) =
     member this.InsertMul (key : string) (el : XElement) =
         this.PreInsert
         fprintf writer "(%s, %s)" key <| ColType.String.ToSqlString(el.Value)
-        
-    member this.Insert(el : XElement) = 
+
+    member this.Insert(el : XElement) =
         if not <| el.Attribute(XName.Get("key")).Value.StartsWith "dblpnote/" then
             this.PreInsert
 
@@ -67,16 +67,17 @@ type SqlDumpStream(file : string, table : string, fields : Col list) =
                     for e in subel do
                         fn thkey e
                 | _ ->
-                    let v = 
+                    let v =
                         if col.IsKeyCol then
                             el.Attribute(XName.Get(col.Name)).Value
                         else
-                            el.Element(XName.Get(col.Name)).Value
+                            let ch = el.Element(XName.Get(col.Name))
+                            if isNull ch && col.Name.Equals("author") then "unknown author" else ch.Value
                     if i > 0 then fprintf writer ", "
                     fprintf writer "%s" << col.Type.ToSqlString <| v
             ) fields
             fprintf writer ")"
     member this.Footer =
         fprintfn writer ";"
-    member this.Close = 
+    member this.Close =
         writer.Close()
